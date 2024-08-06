@@ -54,13 +54,18 @@ public class JWTService {
     private Map<String,String> generateJwt(Compte compte) {
         final long currentTime = System.currentTimeMillis();
         final long expirationTime = currentTime + 20 * 60*1000;
+        final Map<String, Object> json;
+        if(compte.getEmail() == null) {
+            json = Map.of(
+                    "username", compte.getUsername(),
+                    Claims.EXPIRATION, new Date(expirationTime));
 
-        final Map<String, Object> json = Map.of(
-                "nom", compte.getUsername(),
-                Claims.EXPIRATION, new Date(expirationTime),
-                Claims.SUBJECT, compte.getEmail()
-
-        );
+        } else {
+            json = Map.of(
+                    "username", compte.getUsername(),
+                    Claims.EXPIRATION, new Date(expirationTime),
+                    Claims.SUBJECT, compte.getEmail());
+        }
         final String bearer = Jwts.builder().
                 issuedAt(new Date(currentTime))
                 .expiration(new Date(expirationTime)).
