@@ -73,7 +73,9 @@ public class JWTService {
                 .claims(json)
                 .signWith(getKey(), SignatureAlgorithm.HS256)
                 .compact();
-        return Map.of("bearer",bearer);
+        return Map.of("bearer",bearer,
+                "duration",""
+        );
     }
 
     private Key getKey() {
