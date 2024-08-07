@@ -74,7 +74,7 @@ public class JWTService {
                 .signWith(getKey(), SignatureAlgorithm.HS256)
                 .compact();
         return Map.of("bearer",bearer,
-                "duration",""
+                "durationMinutes",""+(expirationTime/1000/60 - currentTime/1000/60)
         );
     }
 
