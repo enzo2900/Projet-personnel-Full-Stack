@@ -6,47 +6,36 @@ const spinner = document.getElementById("spin");
 const root = document.getElementById("root");
 
 
-const fetchWithTimeout = (url, options, timeout = 5000) => {
-    return Promise.race([
-        fetch(url, options),
-        new Promise((_, reject) =>
-            setTimeout(() => reject(new Error('Request timed out')), timeout)
-        )
-    ]);
-};
- async function serverCall (urlServeur = "", method = "GET", requestBody = null) {
-    if(requestBody === null) {
-        return await fetch('http://localhost:8080'+urlServeur, {
-            method: method,
-            headers: {
-                'Content-Type': 'application/json',
+async function serverCall (urlServeur = "", methodInfo = "GET", requestBody = null) {
+    console.log("wiat");
+    const url = 'http://localhost:8080'+urlServeur;
+    const methodConst =  methodInfo  ;
+    const headersConst =  {
+        'Content-Type': 'application/json',
                 'Accept': '*/*',
                 'Access-Control-Allow-Origin': '*'
-    
-            }
-        });
-    } else {
-        return await fetch('http://localhost:8080'+urlServeur, {
-            method: method,
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': '*/*',
-                'Access-Control-Allow-Origin': '*'
-    
-            },
-            body : requestBody
-        });
+    };
+    let bodyConst ="";
+    console.log({method : methodInfo,headers : {},body : ""});
+    if(requestBody !== null) {
+        bodyConst =  requestBody;
     }
+    const info= {method : methodConst,headers : headersConst,body :bodyConst    };
+    console.log(info);
+    return call(url,info);
     
 }
-export async function makeServerCall(connectionData,dataHandler =null,errorHandler=null) {
+async function call(url,callInfo) {
+    return await fetch(url,callInfo);
+}
+export async function makeServerCall(connectionDa,dataHandler =null,errorHandler=null) {
     spinner.style.visibility = 'visible';
     root.classList.add("loading");
     try{
-        console.log(connectionData.data);
-        console.log(connectionData.method);
-        console.log(connectionData.urlServeur);
-        const response = await serverCall(connectionData.urlServeur,connectionData.method,connectionData.data);
+        console.log(connectionDa.data);
+        console.log(connectionDa.method);
+        console.log(connectionDa.urlServeur);
+        const response = await serverCall(connectionDa.urlServeur,connectionDa.method,connectionDa.data);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -61,7 +50,7 @@ export async function makeServerCall(connectionData,dataHandler =null,errorHandl
         root.classList.remove("loading");
         spinner.style.visibility = 'hidden';
         if(errorHandler !== null) {
-            errorHandler(error);
+            errorHandler(error + "Impossible de se connecter, un problème peut survenir au niveau du serveur. Veuillez réessayer plus tard.");
         }
         
     }

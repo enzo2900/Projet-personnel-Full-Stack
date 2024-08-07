@@ -25,3 +25,24 @@ export function FormRowC({children,id,label}) {
         </div>
     );
 }
+export function GeneralInput({type,text,onChange,value,id}) {
+    return(
+        <input type={type} onChange={onChange}id={id} value={value} required>{text}</input>
+    );
+}
+export function InputText({text,onChange,value,id}){
+    return(
+        <GeneralInput type="text" id={id} onChange={onChange} value={value} text={text}></GeneralInput>
+    );
+}
+
+export function InputEmail({text,onChange,value,id}){
+    return(
+        <GeneralInput type="email"  id={id} onChange={onChange} value={value} text={text}></GeneralInput>
+    );
+}
+export function InputPassword({text,onChange,value,id}){
+    return(
+        <GeneralInput type="password"  id={id} onChange={onChange} value={value} text={text}></GeneralInput>
+    );
+}

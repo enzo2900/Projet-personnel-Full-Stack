@@ -8,8 +8,10 @@ import serverCall from '../Class/ApiManager.js';
 import { makeServerCall } from '../Class/ApiManager.js';
 import  {DisplayContext}  from '../Display.js';
 import { ConnectionData } from '../Class/ConnectionData.js';
-import {CenteredForm,FormRowC} from '../Component/UiComponent/CenteredForm';
+import {CenteredForm,FormRowC, InputPassword, InputText} from '../Component/UiComponent/CenteredForm';
 import Home from '../LinkPage/Home.js';
+import { ButtonReturn } from '../Component/UiComponent/Button.js';
+import { Connect } from '../Class/CompteService.js';
 
 function Login() {
     
@@ -30,34 +32,21 @@ function Login() {
         updateDisplay(<Home/>);
     }
     const handleConnection = async () => {
+
         setError(null); // Réinitialiser l'erreur
-        const connection =  {
-            "username": username,
-            "password": password
-        };
-        const datas = new ConnectionData("/connect","POST",JSON.stringify(connection));
-        console.log(JSON.stringify(username,password));
-        console.log(password);
-            const resultRequest=makeServerCall(datas,(result) =>
-                { 
-                    if (result.bearer !== null){
-                        localStorage.setItem("bearer","Bearer  "+result.bearer);
-                        goToHomePage();
-                    }
-                }, (error) => setError(error + "Impossible de se connecter, un problème peut survenir au niveau du serveur. Veuillez réessayer plus tard.")
-            );
+        await Connect(username, password,goToHomePage,  (error) => setError(error));
     };
 
         let contentAffiche =  (
             <CenteredForm>
                 <FormRowC id="usernameConnect" label="Username : ">
-                    <input type="text" id="usernameConnect" value={username} onChange={(e) => setUsername(e.target.value)}/> <br/>
+                    <InputText id="usernameConnect" value={username} onChange={(e) => setUsername(e.target.value)}/>
                 </FormRowC>
                 <FormRowC id="passwordConnect" label="Password : ">
-                    <input type="password" id="passwordConnect" value={password} onChange={(e) => setPassword(e.target.value)}/><br/>
+                    <InputPassword id="passwordConnect" value={password} onChange={(e) => setPassword(e.target.value)}/>
                 </FormRowC>
                 <button onClick={handleConnection}>Connection</button>
-                <button onClick={goToAccountCreationPage}>Create an account</button>
+                <ButtonReturn onClick={goToAccountCreationPage} text="Create an account"/>
             </CenteredForm>
             
         );
