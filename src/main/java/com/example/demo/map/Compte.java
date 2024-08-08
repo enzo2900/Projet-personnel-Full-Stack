@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.Date;
 
 @Entity
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter

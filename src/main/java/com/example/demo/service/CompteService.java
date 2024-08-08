@@ -5,6 +5,7 @@ import com.example.demo.map.Compte;
 import com.example.demo.map.Role;
 import com.example.demo.map.RoleType;
 import com.example.demo.repository.CompteRepository;
+import io.jsonwebtoken.security.Password;
 import lombok.AllArgsConstructor;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,12 @@ public class CompteService implements UserDetailsService {
                 throw new ParametersException("L'email ou votre mot de passe n'est pas correcte");
             }
         }
-
+        if(compte.getUsername().isEmpty()) {
+            throw new ParametersException("L'email ou votre mot de passe n'est pas correcte");
+        }
+        if(compte.getPassword().length() < 8) {
+            throw new ParametersException("L'email ou votre mot de passe n'est pas correcte");
+        }
         String mdpEncode = this.passwordEncoder.encode(compte.getPassword());
         compte.setPassword(mdpEncode);
         Role role = new Role();
