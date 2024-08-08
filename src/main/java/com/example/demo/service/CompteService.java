@@ -51,7 +51,7 @@ public class CompteService implements UserDetailsService {
         if(compte.getUsername().isEmpty()) {
             throw new ParametersException("L'email ou votre mot de passe n'est pas correcte");
         }
-        if(compte.getPassword().length() < 8) {
+        if(!compte.getPassword().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!\"#$%&'()*+,\\-./:;<=>?@^_`{|}~])[A-Za-z\\d!\"#$%&'()*+,\\-./:;<=>?@^_`{|}~]{8,}")) {
             throw new ParametersException("L'email ou votre mot de passe n'est pas correcte");
         }
         String mdpEncode = this.passwordEncoder.encode(compte.getPassword());

@@ -90,7 +90,49 @@ class CompteServiceTest {
         Assertions.assertThrows(ParametersException.class,() ->compteService.inscription(compte),"An exception did not occured to stop user creation.");
 
         //Then this compte should be fetchable with his username
-        Assertions.assertNull(compteRepository.findByUsername("TestInscriptionBasPass"),"The user was created, the password is not correctly verified or was changed.");
+        Assertions.assertTrue(compteRepository.findByUsername("TestInscriptionBasPass").isEmpty(),"The user was created, the password is not correctly verified or was changed.");
+
+    }
+
+    @Test
+    void inscriptionTestPasswordWithNoUppercaseLetter() throws ParametersException {
+        //Given a CompteService and a new compte create
+
+        compte = Compte.builder().username("TestInscriptionBasPass").password("@spaea54ze").build();
+
+        //WHEN this new compte should not register to the database
+        Assertions.assertThrows(ParametersException.class,() ->compteService.inscription(compte),"An exception did not occured to stop user creation.");
+
+        //Then this compte should be fetchable with his username
+        Assertions.assertTrue(compteRepository.findByUsername("TestInscriptionBasPass").isEmpty(),"The user was created, the password is not correctly verified or was changed.");
+
+    }
+
+    @Test
+    void inscriptionTestPasswordWithNoLowercaseLetter() throws ParametersException {
+        //Given a CompteService and a new compte create
+
+        compte = Compte.builder().username("TestInscriptionBasPass").password("@PAEA54ZE").build();
+
+        //WHEN this new compte should not register to the database
+        Assertions.assertThrows(ParametersException.class,() ->compteService.inscription(compte),"An exception did not occured to stop user creation.");
+
+        //Then this compte should be fetchable with his username
+        Assertions.assertTrue(compteRepository.findByUsername("TestInscriptionBasPass").isEmpty(),"The user was created, the password is not correctly verified or was changed.");
+
+    }
+
+    @Test
+    void inscriptionTestPasswordWithNoSpecialCharacter() throws ParametersException {
+        //Given a CompteService and a new compte create
+
+        compte = Compte.builder().username("TestInscriptionBasPass").password("aPzeaA54treE").build();
+
+        //WHEN this new compte should not register to the database
+        Assertions.assertThrows(ParametersException.class,() ->compteService.inscription(compte),"An exception did not occured to stop user creation.");
+
+        //Then this compte should be fetchable with his username
+        Assertions.assertTrue((compteRepository.findByUsername("TestInscriptionBasPass").isEmpty()),"The user was created, the password is not correctly verified or was changed.");
 
     }
 }
