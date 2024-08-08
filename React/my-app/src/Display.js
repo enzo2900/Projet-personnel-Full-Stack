@@ -15,6 +15,7 @@ export const DisplayProvider = ({ children , initialContent}) => {
 
     return (
         <DisplayContext.Provider value={setContent}>
+            {children}
             {content}
         </DisplayContext.Provider>
     );
