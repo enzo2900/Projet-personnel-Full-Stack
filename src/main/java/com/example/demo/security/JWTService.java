@@ -21,6 +21,7 @@ import java.security.Key;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -134,5 +135,22 @@ public class JWTService {
     @Scheduled(cron = "0 */30 * * * *")
     public void removeUselessJwt() {
         this.jwtRepository.deleteAllByExpire(true);
+    }
+
+    public Map<String,String> tokenAvailable(Jwt token) {
+
+        Optional<Jwt> jwt = jwtRepository.findByValeurAndExpire(token.getValeur(),false);
+        Map<String,String> json;
+        if(jwt.isPresent()) {
+            json = Map.of(
+                    "available","true"
+            );
+        } else {
+            json = Map.of(
+                    "available","false"
+            );
+        }
+
+        return json;
     }
 }

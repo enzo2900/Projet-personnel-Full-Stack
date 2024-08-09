@@ -2,15 +2,20 @@ package com.example.demo.map.project;
 
 import com.example.demo.map.Compte;
 import jakarta.persistence.*;
-import lombok.NonNull;
+import lombok.*;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
 public class Post {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE})
     @NonNull
     @JoinColumn(name = "compte.id",referencedColumnName = "id")
     private Compte idUser;

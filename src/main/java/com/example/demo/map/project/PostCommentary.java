@@ -8,9 +8,10 @@ import org.springframework.lang.NonNull;
 public class PostCommentary {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE})
     @NonNull
     @JoinColumn(name = "post.id", referencedColumnName = "id")
     private Post idPost;

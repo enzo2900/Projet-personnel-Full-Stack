@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.aspect.ParametersException;
 import com.example.demo.dto.DTOAuthentification;
 import com.example.demo.map.Compte;
+import com.example.demo.map.Jwt;
 import com.example.demo.security.JWTService;
 import com.example.demo.service.ClientService;
 import com.example.demo.service.CompteService;
@@ -38,6 +39,11 @@ public class ConnectionController {
         }
         return null;
 
+    }
+
+    @PostMapping(path ="/VerifyToken")
+    public Map<String,String> UserConnection(@RequestBody Jwt token) {
+        return jwtService.tokenAvailable(token);
     }
 
     @PostMapping(path = "/inscription")
