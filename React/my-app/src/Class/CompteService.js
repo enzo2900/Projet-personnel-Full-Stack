@@ -21,9 +21,16 @@ export   function Connect(username,password,dataHandler, errorHandler) {
 
 export function sendPost(text,dataHandler, errorHandler){
     const data =  {
-        "text": text,
-        "bearer": localStorage.getItem("bearer")
+        "mainUserCommentary": text,
     };
-    const datas = new ConnectionData("/Post/add","PUT",JSON.stringify(data));
-    makeServerCall(datas,(dataApi) =>dataHandler(dataApi),(error) =>errorHandler(error));
+    const datas = new ConnectionData("/post/add","PUT",JSON.stringify(data));
+    makeServerCall(datas);
+}
+
+export function verifyToken(token,dataHandler,errorHandler){
+    const data= {
+        "valeur": token
+    };
+    const datas = new ConnectionData("/VerifyToken","POST",JSON.stringify(data));
+    makeServerCall(datas,(dataApi) =>dataHandler(dataApi),(error)=> errorHandler(error));
 }

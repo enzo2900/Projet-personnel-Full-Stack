@@ -10,17 +10,35 @@ async function serverCall (urlServeur = "", methodInfo = "GET", requestBody = nu
     console.log("wiat");
     const url = 'http://localhost:8080'+urlServeur;
     const methodConst =  methodInfo  ;
-    const headersConst =  {
-        'Content-Type': 'application/json',
-                'Accept': '*/*',
-                'Access-Control-Allow-Origin': '*'
-    };
+    let headersConst;
+    if(localStorage.getItem("bearer") !== null) {
+        headersConst =  {
+            'Content-Type': 'application/json',
+                    'Accept': '*/*',
+                    'Access-Control-Allow-Origin': '*',
+                    'Authorization': "Bearer "+localStorage.getItem("bearer")
+    
+        };
+    } else {
+        headersConst =  {
+            'Content-Type': 'application/json',
+                    'Accept': '*/*',
+                    'Access-Control-Allow-Origin': '*'
+
+    
+        };
+    }
+    
     let bodyConst ="";
+    let info ;
     console.log({method : methodInfo,headers : {},body : ""});
     if(requestBody !== null) {
-        bodyConst =  requestBody;
+        const bodyConst = requestBody;
+        info= {method : methodConst,headers : headersConst,body :bodyConst    };
+    } else {
+        info= {method : methodConst,headers : headersConst   };
     }
-    const info= {method : methodConst,headers : headersConst,body :bodyConst    };
+    
     console.log(info);
     return call(url,info);
     
@@ -32,14 +50,18 @@ export async function makeServerCall(connectionDa,dataHandler =null,errorHandler
     spinner.style.visibility = 'visible';
     root.classList.add("loading");
     try{
-        console.log(connectionDa.data);
-        console.log(connectionDa.method);
-        console.log(connectionDa.urlServeur);
         const response = await serverCall(connectionDa.urlServeur,connectionDa.method,connectionDa.data);
+        console.log(response);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
-        const resultRequest = await response.json();
+        let resultRequest;
+        try {
+             resultRequest = await response.json();
+        }catch(error) {
+            resultRequest = "No data";
+        }  
+        
         spinner.style.visibility = 'hidden';
         root.classList.remove("loading");
         if(dataHandler !== null) {
@@ -47,6 +69,7 @@ export async function makeServerCall(connectionDa,dataHandler =null,errorHandler
         }
 
     } catch (error) {
+        console.log(error);
         root.classList.remove("loading");
         spinner.style.visibility = 'hidden';
         if(errorHandler !== null) {
@@ -56,5 +79,7 @@ export async function makeServerCall(connectionDa,dataHandler =null,errorHandler
     }
         
 } 
+
+
 
 export default serverCall;

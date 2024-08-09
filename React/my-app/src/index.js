@@ -8,6 +8,10 @@ import App from './App.js';
 
 import reportWebVitals from './reportWebVitals';
 import Login from './Component/Login.js';
+import { verifyToken } from './Class/CompteService.js';
+
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

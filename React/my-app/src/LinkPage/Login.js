@@ -22,7 +22,9 @@ function Login() {
     const [password, setPassword] = useState('');
 
     const  updateDisplay = useContext(DisplayContext);
-
+    if(localStorage.getItem("bearer") !== null) {
+        goToHomePage();
+    }
     
 
     function goToAccountCreationPage() {
@@ -37,9 +39,7 @@ function Login() {
         await Connect(username, password,goToHomePage,  (error) => setError(error));
     };
 
-    if(localStorage.getItem("bearer") !== null) {
-        goToHomePage();
-    }
+    
         let contentAffiche =  (
             <CenteredForm>
                 <FormRowC id="usernameConnect" label="Username : ">

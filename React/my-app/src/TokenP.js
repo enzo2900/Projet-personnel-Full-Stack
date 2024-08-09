@@ -11,7 +11,6 @@ export const TokenContext = createContext();
 export const TokenProvider = ({ children}) => {
     let duration  = -1; 
     let interval;
-    console.log(duration);
     //TODO change to a more efficient algorithm
     function setDuration (dura) {
         duration = dura;
