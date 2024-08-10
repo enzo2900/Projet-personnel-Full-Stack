@@ -24,7 +24,7 @@ export function sendPost(text,dataHandler, errorHandler){
         "mainUserCommentary": text,
     };
     const datas = new ConnectionData("/post/add","PUT",JSON.stringify(data));
-    makeServerCall(datas);
+    makeServerCall(datas,(dataApi) =>dataHandler(dataApi),(error) =>errorHandler(error));
 }
 
 export function verifyToken(token,dataHandler,errorHandler){

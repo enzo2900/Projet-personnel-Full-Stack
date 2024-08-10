@@ -10,7 +10,26 @@ import reportWebVitals from './reportWebVitals';
 import Login from './Component/Login.js';
 import { verifyToken } from './Class/CompteService.js';
 
-
+if (window.performance) {
+  console.info("window.performance work's fine on this browser");
+}
+  if (performance.navigation.type == 1) {
+    console.info( "This page is reloaded" );
+    if(localStorage.getItem("bearer") !== null) {
+      verifyToken(localStorage.getItem("bearer"),(data)=> {
+        if(data.available ==="false") {
+            localStorage.removeItem("bearer");
+            localStorage.removeItem("bearerDuration");
+        }
+      },(error) => {
+        localStorage.removeItem("bearer");
+            localStorage.removeItem("bearerDuration");
+      });
+    }
+    
+  } else {
+    console.info( "This page is not reloaded");
+  }
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

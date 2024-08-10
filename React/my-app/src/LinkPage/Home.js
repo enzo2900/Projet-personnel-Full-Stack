@@ -69,8 +69,12 @@ export default function Home() {
     function sendPostText() {
         sendPost(postText,(data) => getPosts((datas)=>handlePostRetrieved(datas)),(error) => {});
     }
+
     return(
         <>
+            <button onClick={() => {
+                localStorage.removeItem("bearer")
+                setPostRetrieved(false)}} >Deconnextion</button>
             Home Accees
             <input type="text" value={postText} onChange={(e)=>setPostText(e.target.value)}placeholder="You can write text to send messages or create post"/>
             <button onClick={sendPostText}>Poster</button>

@@ -19,7 +19,6 @@ function  AccountCreationPage() {
 
     const handleCreation = (e) =>{
         e.preventDefault();
-        console.log(document.getElementById("confirmPasswordUser").innerText);
         if(passwordConfirm === password) {
             const objet = {
                 "username":username,
@@ -58,7 +57,7 @@ function  AccountCreationPage() {
                     <InputPassword onChange={(e) =>setPassword(e.target.value)} id="passwordUser" value={password}/>
                                 </FormRowC>
                 <FormRowC label="Mot de passe confirmation* : " id="passwordConfirmUser">
-                <InputPassword onChange={(e) =>setPasswordConfirm(e.target.value)} id="passwordConfirmUser" value={password}/>
+                <InputPassword onChange={(e) =>setPasswordConfirm(e.target.value)} id="passwordConfirmUser" value={passwordConfirm}/>
                 
                 </FormRowC>
                 <FormRowC label="Email : " id="emailUser">

@@ -12,14 +12,14 @@ spinner.style.visibility='hidden';
 const App = () => {
     return (
         
-        <>
+        <div className='App'>
            
             <TokenProvider  > 
             <DisplayProvider initialContent={<Login/>}/>
             </TokenProvider>
             
             
-        </>
+        </div>
     );
 };
 
