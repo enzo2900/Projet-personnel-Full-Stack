@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface PostRepository extends JpaRepository<Post,Long> {
 
-    @Query("SELECT u FROM Post u")
+    @Query("SELECT u FROM Post u order by u.dateCreation desc")
     List<Post> getAllPost() ;
 
 }

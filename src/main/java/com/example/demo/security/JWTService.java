@@ -64,8 +64,11 @@ public class JWTService {
         } else {
             json = Map.of(
                     "username", compte.getUsername(),
+                    Claims.EXPIRATION, new Date(expirationTime));
+            /*json = Map.of(
+                    "username", compte.getUsername(),
                     Claims.EXPIRATION, new Date(expirationTime),
-                    Claims.SUBJECT, compte.getEmail());
+                    Claims.SUBJECT, compte.getEmail());*/
         }
         final String bearer = Jwts.builder().
                 issuedAt(new Date(currentTime))

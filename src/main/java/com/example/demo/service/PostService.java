@@ -8,9 +8,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class PostService {
@@ -23,12 +26,17 @@ public class PostService {
     }
 
     public List<Post> getAllPosts() {
-        return  postRepository.getAllPost();
+
+        List<Post> posts = postRepository.getAllPost();
+
+        return  posts;
     }
 
     public void addPost(Post post) {
         post.setIdUser((Compte) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         post.setNumberOfLikes(0);
+        post.setDateCreation(new Date());
+        post.setNumberOfCommentary(0);
 
         postRepository.save(post);
     }

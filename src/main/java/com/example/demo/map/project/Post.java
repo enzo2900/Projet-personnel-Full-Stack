@@ -4,6 +4,8 @@ import com.example.demo.map.Compte;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Date;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,6 +25,11 @@ public class Post {
     private String mainUserCommentary;
 
     private long numberOfLikes;
+
+    private long numberOfCommentary;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateCreation;
 
 
 }
