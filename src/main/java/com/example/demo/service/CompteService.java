@@ -7,6 +7,9 @@ import com.example.demo.map.RoleType;
 import com.example.demo.repository.CompteRepository;
 import io.jsonwebtoken.security.Password;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +28,9 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 public class CompteService implements UserDetailsService {
 
     @Autowired
@@ -33,6 +39,7 @@ public class CompteService implements UserDetailsService {
     private PasswordEncoder passwordEncoder;
 
     private static final String MESSAGE_ERREUR = "Votre identifiant ou mot de passe est incorrect";
+
 
     public ResponseEntity inscription(Compte compte) throws ParametersException {
         /*if(!compte.getPassword().matches("[0-9]{1,}[a-z]{1,}[A-Z]{1,}[:punct:]{1,}")){

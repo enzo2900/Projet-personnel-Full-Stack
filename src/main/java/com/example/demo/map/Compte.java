@@ -26,7 +26,6 @@ public class Compte implements UserDetails {
     private String username;
 
     @NonNull
-    @Transient
     private String password;
 
 
@@ -44,6 +43,7 @@ public class Compte implements UserDetails {
 
 
 
+    @Override
     public String getUsername() {
         return username;
     }
@@ -52,13 +52,7 @@ public class Compte implements UserDetails {
         return creationDate;
     }
 
-    public Role getRole() {
-        return this.role;
-    }
 
-    public void setRole(Role ro) {
-        this.role = ro;
-    }
 
     public void setDate(Date d) {
         this.creationDate = d;
@@ -90,25 +84,8 @@ public class Compte implements UserDetails {
         return Collections.singletonList(new SimpleGrantedAuthority("ROLE_"+this.role));
     }
 
-    public String getPassword() {
-        return password;
-    }
 
-    public String getEmail() {
-        return email;
-    }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
 
 
