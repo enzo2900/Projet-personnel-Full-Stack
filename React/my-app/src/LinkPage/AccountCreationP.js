@@ -6,6 +6,7 @@ import {CenteredForm,FormRowC, InputEmail, InputPassword, InputText} from '../Co
 import Login from './Login';
 import { DisplayContext } from '../Display';
 import { ButtonReturn, ButtonSubmit } from '../Component/UiComponent/Button';
+import { createCompte } from '../Class/CompteService';
 
 function  AccountCreationPage() {
     const [username,setUsername] = useState("");
@@ -25,8 +26,7 @@ function  AccountCreationPage() {
                 "password":password,
                 "email":email
             }
-            const datas = new ConnectionData("/inscription","POST",JSON.stringify(objet));
-            makeServerCall(datas,() => {setResponse("Le compte a été créé.");
+            createCompte(objet,() => {setResponse("Le compte a été créé.");
                 setCreated(true);
             }, (error) => setResponse(error ));
         } else {
@@ -46,7 +46,7 @@ function  AccountCreationPage() {
         );
     }
     return(
-        <CenteredForm>
+        <CenteredForm className="blue">
             <h1>Création de compte</h1>
             <form className="left" onSubmit={handleCreation}>
 
@@ -64,12 +64,13 @@ function  AccountCreationPage() {
                     <InputEmail onChange={(e)=> setEmail(e.target.value)} value={email} id="emailUser" />
                 </FormRowC>
 
-                <div className="center offset-1 col-11">
-                    <ButtonSubmit text="Créer"/>
+                <div className=" center offset-9 col-3">
+                    <ButtonSubmit className="" text="Créer"/>
                 </div>
 
             </form>
-            <ButtonReturn onClick={goToConnection} text="Se connecter"/>
+            
+            <ButtonReturn className="addSpaceOnTop"onClick={goToConnection} text="Se connecter"/>
             {response}
         </CenteredForm>
         

@@ -9,22 +9,47 @@ import App from './App.js';
 import reportWebVitals from './reportWebVitals';
 import Login from './Component/Login.js';
 import { verifyToken } from './Class/CompteService.js';
+import {Token} from './Class/Token.ts';
+const root = ReactDOM.createRoot(document.getElementById('root'));
 
 if (window.performance) {
   console.info("window.performance work's fine on this browser");
 }
   if (performance.navigation.type == 1) {
     console.info( "This page is reloaded" );
+    console.log(localStorage.getItem("bearer"));
     if(localStorage.getItem("bearer") !== null) {
+      console.log(Token.getSingleton().value);
       verifyToken(localStorage.getItem("bearer"),(data)=> {
+        console.log(data.available);
         if(data.available ==="false") {
+          console.log(data.available);
             localStorage.removeItem("bearer");
             localStorage.removeItem("bearerDuration");
+            
         }
+        root.render(
+          <React.StrictMode>
+            <App />
+          </React.StrictMode>
+        );
+
       },(error) => {
+        console.log(error);
         localStorage.removeItem("bearer");
             localStorage.removeItem("bearerDuration");
+            root.render(
+              <React.StrictMode>
+                <App />
+              </React.StrictMode>
+            );
       });
+    } else {
+      root.render(
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      );
     }
     
   } else {
@@ -32,12 +57,7 @@ if (window.performance) {
   }
 
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

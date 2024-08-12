@@ -1,8 +1,9 @@
 import React from "react";
 import { Children } from "react";
-export function CenteredForm({children}) {
+
+export function CenteredForm({children,  className}) {
     return (
-        <div className='centeredDivBox center container'>
+        <div className={` ${className} centeredDivBox center container`}>
             <div className=" center row justify-content-md-center">
                 {children}
             </div>

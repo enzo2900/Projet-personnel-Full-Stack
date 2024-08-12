@@ -10,8 +10,15 @@
   font-size: 20px;
   
 }
+.blue {
+  background-color: lightskyblue;
+  color: white;
+}
 .commentaryButton{
   color: #3498db;
+}
+.addSpaceOnTop{
+  margin-top: 50px;
 }
 .loader {
   border: 16px solid #f3f3f3; /* Light grey */

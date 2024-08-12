@@ -1,7 +1,7 @@
 export function ButtonSubmit({text}) {
     return (<input type="submit" value={text}></input>);
 }
-export function ButtonReturn({text,onClick}) {
-    return (<button onClick={onClick}>{text}</button>);
+export function ButtonReturn({className,text,onClick}) {
+    return (<button className={className} onClick={onClick}>{text}</button>);
 
 }   

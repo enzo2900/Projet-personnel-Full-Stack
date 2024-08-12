@@ -1,13 +1,9 @@
 
 import '../App.css';
 import React, { useEffect, useState,useContext, createContext } from 'react';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import AccountCreationPage from '../LinkPage/AccountCreationP.js';
 import App from '../App.js';
-import serverCall from '../Class/ApiManager.js';
-import { makeServerCall } from '../Class/ApiManager.js';
 import  {DisplayContext}  from '../Display.js';
-import { ConnectionData } from '../Class/ConnectionData.js';
 import {CenteredForm,FormRowC, InputPassword, InputText} from '../Component/UiComponent/CenteredForm';
 import Home from '../LinkPage/Home.js';
 import { ButtonReturn } from '../Component/UiComponent/Button.js';
@@ -36,8 +32,10 @@ function Login() {
     const handleConnection = async () => {
 
         setError(null); // Réinitialiser l'erreur
+        
         await Connect(username, password,goToHomePage,  (error) => setError(error));
     };
+    
 
     
         let contentAffiche =  (

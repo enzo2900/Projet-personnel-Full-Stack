@@ -1,4 +1,4 @@
-import React,{Component} from "react";
+
 
 export class ConnectionData {
     constructor(url, method,data) {
