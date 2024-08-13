@@ -56,20 +56,22 @@ export default function Home() {
     }
 
     return(
-        <>
-            <button onClick={() => {
+        <div className="center">
+            <button className="toTheLeft"onClick={() => {
                 localStorage.removeItem("bearer")
                 Token.getSingleton().setDuration(-1);
                 setPostRetrieved(false)}} >Deconnexion</button>
-            Home Access
-            <input type="text" value={postText} onChange={(e)=>setPostText(e.target.value)}placeholder="You can write text to send messages or create post"/>
-            <button onClick={sendPostText}>Poster</button>
-            {post.map((m)=> {
-                console.log(m);
-                return (<Post post={m} user={m.idUser} commentaryHandler={handleClickPostCommentary}/>);
+            <div>
+                <input type="text" value={postText} onChange={(e)=>setPostText(e.target.value)}placeholder="You can write text to send messages or create post"/>
+                <button onClick={sendPostText}>Poster</button>
+            </div>
+                {post.map((m)=> {
+                    console.log(m);
+                    return (<Post post={m} user={m.idUser} commentaryHandler={handleClickPostCommentary}/>);
 
-            })}
+                })}
             
-        </>
+            
+        </div>
     );
 }

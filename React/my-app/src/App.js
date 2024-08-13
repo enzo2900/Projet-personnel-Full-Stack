@@ -20,27 +20,27 @@ const App = () => {
         console.log(localStorage.getItem("bearer"));
         return (
         
-            <div className='App'>
+           
                
                 
                 <DisplayProvider initialContent={<Home/>}/>
                 
                 
                 
-            </div>
+            
         );
     }
     console.log(localStorage.getItem("bearer"));
     return (
         
-        <div className='App'>
+        
            
             
             <DisplayProvider initialContent={<Login/>}/>
             
             
             
-        </div>
+       
     );
 };
 

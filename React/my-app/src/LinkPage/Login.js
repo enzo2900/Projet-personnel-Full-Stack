@@ -6,7 +6,7 @@ import App from '../App.js';
 import  {DisplayContext}  from '../Display.js';
 import {CenteredForm,FormRowC, InputPassword, InputText} from '../Component/UiComponent/CenteredForm';
 import Home from '../LinkPage/Home.js';
-import { ButtonReturn } from '../Component/UiComponent/Button.js';
+import { BasicButton, ButtonReturn } from '../Component/UiComponent/Button.js';
 import { Connect } from '../Class/CompteService.js';
 
 function Login() {
@@ -39,14 +39,15 @@ function Login() {
 
     
         let contentAffiche =  (
-            <CenteredForm>
+            <CenteredForm className={""}>
                 <FormRowC id="usernameConnect" label="Username : ">
                     <InputText id="usernameConnect" value={username} onChange={(e) => setUsername(e.target.value)}/>
                 </FormRowC>
                 <FormRowC id="passwordConnect" label="Password : ">
                     <InputPassword id="passwordConnect" value={password} onChange={(e) => setPassword(e.target.value)}/>
                 </FormRowC>
-                <button onClick={handleConnection}>Connection</button>
+                <BasicButton text={"Connexion"} onClick={handleConnection} />
+                
                 <ButtonReturn onClick={goToAccountCreationPage} text="Create an account"/>
             </CenteredForm>
             
@@ -54,7 +55,7 @@ function Login() {
 
 
     return (
-    <div className="center">
+    <div className="centeredOnScreen">
         {contentAffiche}
         <br/>
         <div className="error">{error}</div>

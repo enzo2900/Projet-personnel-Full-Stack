@@ -1,7 +1,92 @@
-.App {
-  text-align: center;
+
+body, html {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  
+  
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: linear-gradient(to right top, #051937, #412a4e, #753d5a, #a0585c, #be7c5d);
+  color : white;
+
+}
+button:hover{
+  opacity: 50%;
+  
 }
 
+
+
+/* CSS */
+.button-34 {
+  background: #5E5DF0;
+  border-radius: 999px;
+  box-shadow: #5E5DF0 0 10px 20px -10px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-family: Inter,Helvetica,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Noto Color Emoji","Segoe UI Symbol","Android Emoji",EmojiSymbols,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans",sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  opacity: 1;
+  outline: 0 solid transparent;
+  padding: 8px 18px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: fit-content;
+  word-break: break-word;
+  border: 0;
+}
+.center{
+  text-align: center;
+}
+.addSpaceAround{
+  margin: 10px;
+  
+}
+.little{
+  size: 40%;
+}
+button, .button{
+  position: relative;
+  border-radius: 999px;
+  background-color: transparent;
+  border:solid rgb(245, 218, 168);
+  color : white;
+  z-index: 10;
+  
+}
+
+.toTheLeft{
+  float: left;
+}
+
+.takeAllSpace{
+  width: 100%;
+}
+#root,.App{
+  height: 100%;
+  width: auto;
+}
+* {
+  box-sizing: border-box; /* Inclut le padding et la bordure dans la taille totale */
+}
+.centeredOnScreen{
+  
+  display: flex; /* Active Flexbox uniquement pour centrer le contenu */
+    flex-direction: column; /* Empile les éléments verticalement */
+    justify-content: center; /* Centre verticalement */
+    align-items: center; /* Centre horizontalement */
+    flex-grow: 1; /* Permet à cet élément de prendre tout l'espace disponible */
+    height: 100%;
+
+  
+ 
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -10,9 +95,9 @@
   font-size: 20px;
   
 }
-.blue {
-  background-color: lightskyblue;
-  color: white;
+.contour {
+  border: solid rgb(245, 218, 168);
+  color:  white;
 }
 .commentaryButton{
   color: #3498db;
@@ -21,14 +106,15 @@
   margin-top: 50px;
 }
 .loader {
-  border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid #3498db; /* Blue */
+  border: 16px solid #f8c1c1; 
+  border-top: 16px solid #0e0b94; 
   border-radius: 50%;
   width: 120px;
   height: 120px;
   position : sticky;
   animation: spin 2s linear infinite;
 }
+
 .centeredDivBox{
   width: 45%;
   min-width: 600px;
@@ -68,9 +154,7 @@
     width : 60px;
     background-color: white;
 }
-.center {
-    text-align : center;
-}
+
 
 .App-header {
   background-color: #282c34;

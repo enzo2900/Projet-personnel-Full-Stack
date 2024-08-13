@@ -46,7 +46,8 @@ function  AccountCreationPage() {
         );
     }
     return(
-        <CenteredForm className="blue">
+        <div className='centeredOnScreen'>
+        <CenteredForm className="contour">
             <h1>Création de compte</h1>
             <form className="left" onSubmit={handleCreation}>
 
@@ -69,10 +70,11 @@ function  AccountCreationPage() {
                 </div>
 
             </form>
-            
-            <ButtonReturn className="addSpaceOnTop"onClick={goToConnection} text="Se connecter"/>
+            <div className="addSpaceOnTop"></div>
+            <ButtonReturn className="takeAllSpace" onClick={goToConnection} text="Se connecter"/>
             {response}
         </CenteredForm>
+        </div>
         
     )
 }

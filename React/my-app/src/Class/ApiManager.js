@@ -8,7 +8,7 @@ const root = document.getElementById("root");
 
 async function serverCall (urlServeur = "", methodInfo = "GET", requestBody = null) {
     console.log("wiat");
-    const url = 'http://localhost:8080'+urlServeur;
+    const url = 'http://192.168.1.14:8080'+urlServeur;
     const methodConst =  methodInfo  ;
     let headersConst;
     if(localStorage.getItem("bearer") !== null) {
