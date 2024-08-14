@@ -16,6 +16,7 @@ export   function Connect(username,password,dataHandler, errorHandler) {
             localStorage.setItem("bearer",data.bearer);
             console.log(data);
             localStorage.setItem("bearerDuration",parseInt(data.durationMinutes) *60*1000);
+            Token.getSingleton().stopTimer();
             Token.getSingleton().setValue(data.bearer);
             Token.getSingleton().setDuration(data.durationMinutes*1000*60);
             Token.getSingleton().beginTimer();

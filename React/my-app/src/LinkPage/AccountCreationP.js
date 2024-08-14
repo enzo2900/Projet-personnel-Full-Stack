@@ -16,7 +16,7 @@ function  AccountCreationPage() {
     const [email,setEmail] = useState("");
     const [created,setCreated] = useState(false);
 
-    const  updateDisplay = useContext(DisplayContext);
+    const  {updateDisplay} = useContext(DisplayContext);
 
     const handleCreation = (e) =>{
         e.preventDefault();

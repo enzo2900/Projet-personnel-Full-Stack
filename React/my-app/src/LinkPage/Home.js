@@ -7,6 +7,8 @@ import { Post } from "../Component/UiComponent/PostComponent.js";
 import { sendPost, verifyToken } from "../Class/CompteService.js";
 import { getPostCommentary, getPosts } from "../Class/PostService.js";
 import { Token } from "../Class/Token.ts";
+import { BasicPopup } from "../Component/PopUp.js";
+import { InputText } from "../Component/UiComponent/CenteredForm.js";
 
 
 export default function Home() {
@@ -14,11 +16,10 @@ export default function Home() {
     const [post,setPost] = useState([]);
     const [postText,setPostText] = useState("");
     const [clickedCommentary,setClickedCommentary] = useState(false);
-    const updateDisplay = useContext(DisplayContext);
+    const {updateDisplay,updateSubDisplay} = useContext(DisplayContext);
     const [postRetrieved,setPostRetrieved] = useState(false);
-    const end = Token.getSingleton().beginTimer(()=> {
-        updateDisplay(<Login/>);
-    });
+
+    
     console.log(localStorage.getItem("bearerDuration"));
     
     if(!postRetrieved) {
@@ -52,7 +53,13 @@ export default function Home() {
        
     }
     function sendPostText() {
-        sendPost(postText,(data) => getPosts((datas)=>handlePostRetrieved(datas)),(error) => {});
+        if(postText !== "" ){
+            sendPost(postText,(data) => getPosts((datas)=>handlePostRetrieved(datas)),(error) => {});
+        } else {
+            
+            updateSubDisplay(<BasicPopup text="Veuillez écrire un post"/>)
+        }
+       
     }
 
     return(
@@ -62,12 +69,14 @@ export default function Home() {
                 Token.getSingleton().setDuration(-1);
                 setPostRetrieved(false)}} >Deconnexion</button>
             <div>
-                <input type="text" value={postText} onChange={(e)=>setPostText(e.target.value)}placeholder="You can write text to send messages or create post"/>
+                <InputText value={postText} onChange={(e)=>setPostText(e.target.value)} placeholder="You can write text to send messages or create post"/>
+                
                 <button onClick={sendPostText}>Poster</button>
             </div>
+            <br></br>
                 {post.map((m)=> {
                     console.log(m);
-                    return (<Post post={m} user={m.idUser} commentaryHandler={handleClickPostCommentary}/>);
+                    return (<><Post post={m} user={m.idUser} commentaryHandler={handleClickPostCommentary}/><br></br></>);
 
                 })}
             

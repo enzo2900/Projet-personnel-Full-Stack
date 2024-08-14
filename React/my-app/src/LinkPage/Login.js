@@ -17,7 +17,7 @@ function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    const  updateDisplay = useContext(DisplayContext);
+    const  {updateDisplay} = useContext(DisplayContext);
     if(localStorage.getItem("bearer") !== null) {
         goToHomePage();
     }

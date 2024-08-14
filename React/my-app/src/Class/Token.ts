@@ -60,6 +60,9 @@ export class Token {
         
         
     }
+    public stopTimer() {
+        clearInterval(this.interval);
+    }
     private verifyEnd() {
         if(this.tokenDuration <= 0) {
             localStorage.removeItem("bearer");

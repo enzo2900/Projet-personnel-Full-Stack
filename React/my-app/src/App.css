@@ -1,18 +1,27 @@
 
+:root{
+ --primaryColor: #051937;
+ --secondaryColor:#be7c5d;
+ --accent1:#66373D;
+ --accent2:#340A13;
+ --neutralColor:#A7AABD;
+ --neutralColor2 : #737687;
+ --primaryTextColor:white;
+}
+
 body, html {
   height: 100%;
   width: 100%;
   margin: 0;
-  
+  color: var(--neutralColor2);
   
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: linear-gradient(to right top, #051937, #412a4e, #753d5a, #a0585c, #be7c5d);
-  color : white;
+  background-image: linear-gradient(to top, #051937, #565c77, #7d8299, #7d8299, #a7aabd);  color : white;
 
 }
-button:hover{
+button:hover,.button:hover{
   opacity: 50%;
   
 }
@@ -48,15 +57,45 @@ button:hover{
   margin: 10px;
   
 }
-.little{
-  size: 40%;
+h1,h2{
+  color: var(--primaryColor);
+}
+.input{
+  border:solid var(--primaryColor);
+  border-radius: 999px;
+}
+
+.input:focus,.button:active,button:active {
+  background-color: var(--accent2);
+  color: var(--primaryTextColor);
+  transition: all 0.5s;
+
+}
+
+.button:active,button:active{
+  background-color: var(--accent2);
+  /*background-color: #e45757;*/
+  color: var(--neutralColor2);
+  transition: all 0.04s;
+}
+
+.littleText{
+  font-size: 10px;
+}
+.button{
+  position: relative;
+  border-radius: 999px;
+  background-color: transparent;
+  border:solid var(--primaryColor);
+  color : var(--primaryTextColor);
+  z-index: 10;
 }
 button, .button{
   position: relative;
   border-radius: 999px;
   background-color: transparent;
-  border:solid rgb(245, 218, 168);
-  color : white;
+  border:solid var(--primaryColor);
+  color : var(--primaryTextColor);
   z-index: 10;
   
 }
@@ -91,29 +130,16 @@ button, .button{
   height: 40vmin;
   pointer-events: none;
 }
-.post{
-  font-size: 20px;
-  
-}
+
 .contour {
-  border: solid rgb(245, 218, 168);
-  color:  white;
+  border: solid var(--primaryColor);
+  color:  var(--primaryTextColor);
 }
-.commentaryButton{
-  color: #3498db;
-}
+
 .addSpaceOnTop{
   margin-top: 50px;
 }
-.loader {
-  border: 16px solid #f8c1c1; 
-  border-top: 16px solid #0e0b94; 
-  border-radius: 50%;
-  width: 120px;
-  height: 120px;
-  position : sticky;
-  animation: spin 2s linear infinite;
-}
+
 
 .centeredDivBox{
   width: 45%;
@@ -141,6 +167,59 @@ button, .button{
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+/* Commentary css*/
+.commentary{
+  margin-left: 15%;
+  background-color: var(--primaryColor);
+  color: var(--neutralColor);
+  margin-right: 10%;
+  font-size: 20px;
+  max-width: 300px;
+}
+.commentaryHeader{
+  text-align: left;
+}
+.commentaryText{
+  max-width: 250px;
+  margin: 10px;
+  overflow:auto;
+  word-break: break-word;
+  text-align: left;
+}
+.commentaryButton{
+  text-align: left;
+  background-color: var(--primaryColor);
+}
+
+.little{
+
+  font-size: 10px;
+
+}
+
+/* popup*/
+.popup{
+  width: 120px;
+  height: 120px;
+  z-index: 20;
+  position: fixed; /* Position fixe */
+            left: 50%; /* Centrer horizontalement */
+            top: 50%; /* Centrer verticalement */
+            transform: translate(-50%, -50%); /* Ajuster le centrage */
+  
+}
+/* Loading */
+
+.loader {
+  border: 16px solid var(--accent1); 
+  border-top: 16px solid var(--primaryTextColor); 
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  position : sticky;
+  animation: spin 2s linear infinite;
 }
 
 .loading {

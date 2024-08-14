@@ -26,14 +26,14 @@ export function FormRowC({children,id,label}) {
         </div>
     );
 }
-export function GeneralInput({type,text,onChange,value,id}) {
+export function GeneralInput({type,text,onChange,value,id,placeholder}) {
     return(
-        <input type={type} onChange={onChange}id={id} value={value} required>{text}</input>
+        <input className="input" type={type} placeholder={placeholder} onChange={onChange}id={id} value={value} required>{text}</input>
     );
 }
-export function InputText({text,onChange,value,id}){
+export function InputText({text,onChange,value,id,placeholder}){
     return(
-        <GeneralInput type="text" id={id} onChange={onChange} value={value} text={text}></GeneralInput>
+        <GeneralInput type="text" placeholder={placeholder} id={id} onChange={onChange} value={value} text={text}></GeneralInput>
     );
 }
 
