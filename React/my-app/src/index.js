@@ -5,7 +5,7 @@ import './index.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import App from './App.js';
-
+import { BrowserRouter } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 
 import { verifyToken } from './Class/CompteService.js';
@@ -46,8 +46,11 @@ if (window.performance) {
       });
     } else {
       root.render(
+        
         <React.StrictMode>
-          <App />
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
         </React.StrictMode>
       );
     }

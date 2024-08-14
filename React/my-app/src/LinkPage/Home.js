@@ -9,7 +9,7 @@ import { getPostCommentary, getPosts } from "../Class/PostService.js";
 import { Token } from "../Class/Token.ts";
 import { BasicPopup } from "../Component/PopUp.js";
 import { InputText } from "../Component/UiComponent/CenteredForm.js";
-
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
     const [postCommentary,setPostCommentary] = useState(); 
@@ -18,7 +18,7 @@ export default function Home() {
     const [clickedCommentary,setClickedCommentary] = useState(false);
     const {updateDisplay,updateSubDisplay} = useContext(DisplayContext);
     const [postRetrieved,setPostRetrieved] = useState(false);
-
+    const navigate = useNavigate();
     
     console.log(localStorage.getItem("bearerDuration"));
     
@@ -28,7 +28,7 @@ export default function Home() {
     }
     console.log(localStorage.getItem("bearerDuration"))
     if(localStorage.getItem("bearer") === null) {
-        updateDisplay(<Login/>);
+        navigate("/");
     } else {
 
     }

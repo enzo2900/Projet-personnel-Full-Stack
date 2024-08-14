@@ -6,20 +6,16 @@ import { ConnectionData } from "./ConnectionData";
 import { makeServerCall } from "./ApiManager";
 import { Token } from "./Token.ts";
 import { isAPassword } from "./Compte.ts";
+
 export   function Connect(username,password,dataHandler, errorHandler) {
-    
-    console.log(errorHandler);
-    console.log(username);
-    
     useConnectStatus(username,password,(data) => {
         if(data.bearer !== null) {
             localStorage.setItem("bearer",data.bearer);
-            console.log(data);
             localStorage.setItem("bearerDuration",parseInt(data.durationMinutes) *60*1000);
             Token.getSingleton().stopTimer();
             Token.getSingleton().setValue(data.bearer);
             Token.getSingleton().setDuration(data.durationMinutes*1000*60);
-            Token.getSingleton().beginTimer();
+            
             dataHandler();
         }
     },(error)=>errorHandler(error));

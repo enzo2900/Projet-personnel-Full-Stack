@@ -7,13 +7,14 @@ import Login from './Login';
 import { DisplayContext } from '../Display';
 import { ButtonReturn, ButtonSubmit } from '../Component/UiComponent/Button';
 import { createCompte } from '../Class/CompteService';
-
+import { useNavigate } from 'react-router-dom';
 function  AccountCreationPage() {
     const [username,setUsername] = useState("");
     const [password,setPassword] = useState("");
     const [response,setResponse] = useState("");
     const [passwordConfirm,setPasswordConfirm] = useState("");
     const [email,setEmail] = useState("");
+    const navigate = useNavigate()
     const [created,setCreated] = useState(false);
 
     const  {updateDisplay} = useContext(DisplayContext);
@@ -34,7 +35,7 @@ function  AccountCreationPage() {
         }
     }
     function goToConnection() {
-        updateDisplay(<Login/>);
+        navigate("/");
     }
 
     if(created) {

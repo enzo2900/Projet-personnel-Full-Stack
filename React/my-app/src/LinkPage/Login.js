@@ -8,26 +8,29 @@ import {CenteredForm,FormRowC, InputPassword, InputText} from '../Component/UiCo
 import Home from '../LinkPage/Home.js';
 import { BasicButton, ButtonReturn } from '../Component/UiComponent/Button.js';
 import { Connect } from '../Class/CompteService.js';
-
+import { useNavigate } from "react-router-dom";
+import { Token } from '../Class/Token.ts';
 function Login() {
     
-    const changeDisplay = useContext(App);
-
+    
     const [error, setError] = useState(null);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-
+    const navigate = useNavigate();
     const  {updateDisplay} = useContext(DisplayContext);
+
     if(localStorage.getItem("bearer") !== null) {
-        goToHomePage();
+        navigate("/home")
     }
     
 
     function goToAccountCreationPage() {
-        updateDisplay(<AccountCreationPage />);
+        navigate("/CreateAccount");
+       
     }
     function goToHomePage() {
-        updateDisplay(<Home/>);
+        Token.getSingleton().beginTimer(() => navigate("/"));
+        navigate("/home")
     }
     const handleConnection = async () => {
 
