@@ -3,14 +3,14 @@ export function Post({post,commentaryHandler,user}) {
 
     return (
         <div className="commentary">
-            <div className="col-12 commentaryHeader">
-                <p><span style={{fontSize:'10px',textAlign:"right"}}>{date }</span> {user.username}</p>
+            <div className="col-12 commentaryHeader ">
+                <p className="flex-box">{user.username} <span className="right" style={{fontSize:'10px'}}>{date }</span> </p>
                 </div>
             <div className="col-12 commentaryText">
                 {post.mainUserCommentary} 
             </div>
             <div className="col-12 commentaryButtonLayout">
-                {post.numberOfCommentary} <button className="little commentaryButton" onClick={commentaryHandler}>Commentaires</button> 
+                <p>{post.numberOfCommentary} <button className="little commentaryButton" onClick={commentaryHandler}>Commentaires</button></p> 
             </div>
         </div>
     );

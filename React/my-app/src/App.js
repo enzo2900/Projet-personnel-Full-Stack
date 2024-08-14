@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { BrowserRouter as Router, Route, Routes, Link, useNavigate, redirect} from 'react-router-dom';
 import Login from './LinkPage/Login';
@@ -18,7 +18,12 @@ Token.getSingleton().setValue(localStorage.getItem("bearer"));
 Token.getSingleton().setDuration(parseInt(localStorage.getItem("bearerDuration")));
 
 function App()  {
-        
+        const navigate = useNavigate();
+        useEffect(() => {
+                if(localStorage.getItem("bearer") !== null) {
+                    navigate("/home");
+                }
+        },[]);
       if(localStorage.getItem("bearer") !== null) {
         console.log(localStorage.getItem("bearer"));
         Token.getSingleton().beginTimer(()=>redirect("/"));
@@ -29,6 +34,7 @@ function App()  {
         );
     } else {
         redirect("/");
+        
     }
     return (
         <>

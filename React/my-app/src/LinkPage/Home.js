@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { DisplayContext } from "../Display";
 import Login from "./Login";
 import { TokenContext, TokenProvider } from "../TokenP.js";
@@ -9,26 +9,34 @@ import { getPostCommentary, getPosts } from "../Class/PostService.js";
 import { Token } from "../Class/Token.ts";
 import { BasicPopup } from "../Component/PopUp.js";
 import { InputText } from "../Component/UiComponent/CenteredForm.js";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
+import { useTokenExpired } from "../Class/Hooks/useTokenExpired.js";
 
 export default function Home() {
-    const [postCommentary,setPostCommentary] = useState(); 
+    const [postCommentary,setPostCommentary] = useState([]); 
     const [post,setPost] = useState([]);
     const [postText,setPostText] = useState("");
     const [clickedCommentary,setClickedCommentary] = useState(false);
     const {updateDisplay,updateSubDisplay} = useContext(DisplayContext);
     const [postRetrieved,setPostRetrieved] = useState(false);
     const navigate = useNavigate();
-    
-    console.log(localStorage.getItem("bearerDuration"));
-    
+    const [commentaryOpened,setCommentaryOpened] = useState(false);
+    const [selectetPost,setSelectedPost] = useState();
+    const [commentaryText,setCommentaryText] = useState();
+    useEffect(() => {
+        if(localStorage.getItem("bearer") === null) {
+            navigate("/");
+        }
+},[]);
     if(!postRetrieved) {
         getPosts((datas)=>handlePostRetrieved(datas));
         setPostRetrieved(true);
     }
     console.log(localStorage.getItem("bearerDuration"))
     if(localStorage.getItem("bearer") === null) {
-        navigate("/");
+        redirect("/");
+        
+        
     } else {
 
     }
@@ -37,9 +45,20 @@ export default function Home() {
 
     function handleClickPostCommentary(id) {
         getPostCommentary(id,(data)=> {
-            setPostCommentary(data);
-            setClickedCommentary(true);}
+            if(data === undefined) {
+                setPostCommentary([]);
+            } else {
+                setPostCommentary(data);
+            }
+            setClickedCommentary(true);},(error) =>{
+                ;
+            }
         );
+        setCommentaryOpened(true);
+
+    }
+    function sendCommentary(id) {
+
     }
     function handlePostRetrieved(posts) {
         console.log(posts);
@@ -61,7 +80,26 @@ export default function Home() {
         }
        
     }
+    if(commentaryOpened) {
+        return(
+            <div className="center">
+                <Post post={selectetPost} user={selectetPost.idUser} commentaryHandler={() =>{setSelectedPost();setCommentaryOpened(false);}}/>
+                <InputText value={commentaryText} onChange={(e)=>setCommentaryText(e.target.value)} placeholder="You can write text to create a commentary"/>
+                
+                <button onClick={()=>sendPostText(selectetPost.id)}>Poster</button>
+                <div className="flex-box">{
+                   
+                        postCommentary.map((m)=> {
+                        
+                            return (<>{m}</>);
 
+                        })
+                    
+                }
+                </div>
+            </div>
+        );
+    }
     return(
         <div className="center">
             <button className="toTheLeft"onClick={() => {
@@ -74,13 +112,16 @@ export default function Home() {
                 <button onClick={sendPostText}>Poster</button>
             </div>
             <br></br>
+            <div className="flex-box">
                 {post.map((m)=> {
                     console.log(m);
-                    return (<><Post post={m} user={m.idUser} commentaryHandler={handleClickPostCommentary}/><br></br></>);
+                    return (<div className="col-6"><Post post={m} user={m.idUser} commentaryHandler={() =>{handleClickPostCommentary(m.id);setSelectedPost(m);}}/></div>);
 
                 })}
             
+            </div>
             
         </div>
+        
     );
 }

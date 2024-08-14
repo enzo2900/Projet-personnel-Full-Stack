@@ -7,6 +7,7 @@
  --neutralColor:#A7AABD;
  --neutralColor2 : #737687;
  --primaryTextColor:white;
+ --focusColor : rgb(147, 206, 255);
 }
 @media screen and (min-height: 100vh) {
   html{
@@ -74,14 +75,14 @@ h1,h2{
 }
 
 .input:focus,.button:active,button:active {
-  background-color:rgb(147, 206, 255);
+  background-color:var(--focusColor);
   color: var(--primaryTextColor);
   transition: all 0.5s;
 
 }
 
 .button:active,button:active{
-  background-color: rgb(147, 206, 255);
+  background-color: var(--focusColor);
   /*background-color: #e45757;*/
   color: var(--neutralColor2);
   transition: all 0.04s;
@@ -178,18 +179,35 @@ button, .button{
 }
 
 /* Commentary css*/
+.flex-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.right{
+  text-align: end;
+}
+
+.left{
+  text-align: left;
+}
 .commentary{
   margin-left: 15%;
+  border-radius: 10px;
   background-color: var(--primaryColor);
   color: var(--neutralColor);
   margin-right: 10%;
   font-size: 20px;
   max-width: 300px;
 }
+p{
+  margin: 5px;
+}
 .commentaryHeader{
   text-align: left;
 }
 .commentaryText{
+  
   max-width: 250px;
   margin: 10px;
   overflow:auto;
@@ -197,8 +215,8 @@ button, .button{
   text-align: left;
 }
 .commentaryButtonLayout{
+  
   text-align: left;
-  background-color: var(--primaryColor);
   
 }
 .commentaryButton{
@@ -242,6 +260,20 @@ button, .button{
   pointer-events: none;
  
   opacity: 0.5;
+}
+/* profil */
+
+.profil {
+  display: flex;
+  flex-direction: column;
+}
+
+.profilImage{
+
+}
+
+.profilText{
+
 }
 .square {
     height: 60px;

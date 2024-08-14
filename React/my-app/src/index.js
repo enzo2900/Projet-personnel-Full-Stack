@@ -56,6 +56,7 @@ function verifyTokenWhenReload() {
       
     } else {
       console.info( "This page is not reloaded");
+      render();
     }
 }
 
