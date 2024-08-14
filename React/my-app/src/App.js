@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BrowserRouter as Router, Route, Routes, Link, useNavigate} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link, useNavigate, redirect} from 'react-router-dom';
 import Login from './LinkPage/Login';
 
 import { createContext, useState, useContext } from 'react';
@@ -17,44 +17,24 @@ spinner.style.visibility='hidden';
 Token.getSingleton().setValue(localStorage.getItem("bearer"));
 Token.getSingleton().setDuration(parseInt(localStorage.getItem("bearerDuration")));
 
-const App = () => {
-        const navigate = useNavigate();
+function App()  {
+        
       if(localStorage.getItem("bearer") !== null) {
         console.log(localStorage.getItem("bearer"));
-        Token.getSingleton().beginTimer(() => navigate("/"));
+        Token.getSingleton().beginTimer(()=>redirect("/"));
         return (<>
-                        <Routes >
-            <Route path="/" element={<Login/>}/>
-            <Route path="CreateAccount" element={<AccountCreationPage/>}/>
-            <Route path="Home" element={<Home/>}/>
-        </Routes>
+                        <RouteLayout/>
                 <DisplayProvider></DisplayProvider>
-           
-               
-                
-               
                 </>
-                
-                
-            
         );
+    } else {
+        redirect("/");
     }
-    console.log(localStorage.getItem("bearer"));
     return (
         <>
-         <Routes>
-            <Route path="/" element={<Login/>}/>
-            <Route path="CreateAccount" element={<AccountCreationPage/>}/>
-            <Route path="Home" element={<Home/>}/>
-        </Routes>
-        
-        <DisplayProvider></DisplayProvider>
-            
-            
-            </>
-            
-            
-       
+                 <RouteLayout/>
+                <DisplayProvider></DisplayProvider>
+        </>
     );
 };
 

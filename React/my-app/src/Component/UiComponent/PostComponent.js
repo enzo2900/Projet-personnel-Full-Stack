@@ -1,5 +1,5 @@
 export function Post({post,commentaryHandler,user}) {
-    const date = ((""+post.dateCreation).split("T",2)[1].split(".",1));
+    const date = (""+post.dateCreation).substring(5,10)+"  "+((""+post.dateCreation).split("T",2)[1].split(".",1));
 
     return (
         <div className="commentary">
@@ -9,8 +9,8 @@ export function Post({post,commentaryHandler,user}) {
             <div className="col-12 commentaryText">
                 {post.mainUserCommentary} 
             </div>
-            <div className="col-12 commentaryButton">
-                {post.numberOfCommentary} <button className="little" onClick={commentaryHandler}>Commentaires</button> 
+            <div className="col-12 commentaryButtonLayout">
+                {post.numberOfCommentary} <button className="little commentaryButton" onClick={commentaryHandler}>Commentaires</button> 
             </div>
         </div>
     );

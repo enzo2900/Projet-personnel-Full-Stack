@@ -8,6 +8,7 @@ export function RouteLayout() {
             <Route path="/" element={<Login/>}/>
             <Route path="CreateAccount" element={<AccountCreationPage/>}/>
             <Route path="Home" element={<Home/>}/>
+            <Route path="*" element={<Login/>}/>
         </Routes>
     );
 }
